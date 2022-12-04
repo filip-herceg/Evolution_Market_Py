@@ -7,4 +7,5 @@ class Company(Possession):
     # Can consume material
     # Can hire/fire Subjects
     # MUST pay Employees
+    # Can bankrupt
     pass
