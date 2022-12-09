@@ -1,4 +1,4 @@
-from abc import ABC
+from env.Possession import Possession
 
-class Item(ABC):
+class Item(Possession):
     pass

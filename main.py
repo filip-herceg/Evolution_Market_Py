@@ -1,6 +1,7 @@
-import subjects.Human
-import subjects.Subject
-import subjects.Bank
+from subjects.humans.Humanoid import Humanoid
+from test.sandbox import sandbox
 
 if __name__ == '__main__':
-    human = subjects.Human.Human()
+    humanoid = Humanoid()
+    #sandbox = sandbox()
+
