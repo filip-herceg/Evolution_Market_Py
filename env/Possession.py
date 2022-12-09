@@ -1,5 +1,6 @@
 from abc import ABC
 
+
 class Possession(ABC):
     # Needs to contain/do:
     # - Has a Type (→Comparable!)
@@ -10,7 +11,7 @@ class Possession(ABC):
     # - Quality / Productivity / Efficiency
     # - Can have fixed / variable costs
 
-    def __init__(self, name, value, condition=1.0, owner=None):
+    def __init__(self, name, value, condition=1.0, owner=None, quality=1.0):
         # Represents the name of the possession, which could be used to identify and distinguish it from other
         # possessions.
         self.name = name
@@ -19,10 +20,13 @@ class Possession(ABC):
         self.value = value
 
         # Represents the condition of the possession, which could be used to track its state (e.g. damaged, broken)
-        self.condition = condition
+        self.condition = max(0.0, min(1.0, condition))
 
         # Represents the owner of the possession, which could be used to track who currently possesses it
         self.owner = owner
+
+        # Represents the quality of the possession, which could be used to track its durability or lifespan.
+        self.quality = quality
 
     def use(self):
         # Use the possession (e.g. consume its resources, or activate its functionality)
