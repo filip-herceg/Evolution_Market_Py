@@ -1,8 +1,5 @@
 def check_if_dead(human):
-  if human.health <= 0:
-    return True
-  else:
-    return False
+  return human.health <= 0
 
 
 
