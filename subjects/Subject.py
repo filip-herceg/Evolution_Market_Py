@@ -26,6 +26,20 @@ class Subject:
     def sell(self):
         pass
 
-    # This method allows the subject to interact with other subjects, such as by trading items or exchanging information.
+    # This method allows the subject to interact with other subjects, such as by trading items or exchanging
+    # information.
     def interact(self):
         pass
+
+    def check_possessions(self):
+        # Create an empty list to store the subject's possessions
+        possessions = []
+
+        # Iterate over the list of all possessions in the simulation
+        for possession in all_possessions:
+            # If the possession's owner is the subject, add the possession to the list
+            if possession.owner == self:
+                possessions.append(possession)
+
+        # Return the list of possessions
+        return possessions
