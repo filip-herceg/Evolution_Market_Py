@@ -1,7 +1,11 @@
 import random
+
+import scipy.stats as stats
+
 from subjects.Subject import Subject
 from subjects.Bank import Bank
 from subjects.Company import Company
+import scipy
 
 
 class Human(Subject):
@@ -96,18 +100,17 @@ class Human(Subject):
             print("Insufficient funds")
 
 
-def _mutate_trait(trait):
-    # Generate a random value between 0 and 1 to determine how much mutation to apply
-    mutation_factor = random.uniform(0, 1)
+def _mutate_trait(trait: float, std: float = 0.1) -> float:
+    # Generate a random value from a normal distribution with mean 0 and the specified standard deviation
+    mutation_amount = stats.norm.rvs(0, std)
 
-    # If the mutation factor is high, apply a small amount of mutation
-    if mutation_factor > 0.8:
-        trait += random.uniform(-0.1, 0.1)
-    # If the mutation factor is low, apply a larger amount of mutation
-    else:
-        trait += random.uniform(-0.5, 0.5)
+    # Add the mutation amount to the original trait value
+    mutated_trait = trait + mutation_amount
 
-    # Make sure the personality value remains within the valid range of 0 to 1
-    trait = max(0, min(trait, 1))
+    # Make sure the mutated trait is in the range 0 to 1
+    if mutated_trait < 0:
+        mutated_trait = 0
+    elif mutated_trait > 1:
+        mutated_trait = 1
 
-    return trait
+    return mutated_trait
