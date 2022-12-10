@@ -1,9 +1,9 @@
-import subjects
 from env.Possession import Possession
-import subjects.Subject
+from subjects.Subject import Subject
 
 
-class Company(Possession, subjects.Subject.Subject):
+class Company(Possession, Subject):
+    company_list = []
     # Need to contain/do:
     # Can produce products
     # Can consume material
@@ -14,8 +14,15 @@ class Company(Possession, subjects.Subject.Subject):
     # Can be owned by a Company
 
     # create a __init__ method which sets a name, the owner, the money
-    def __init__(self, name: str = None, money: float = 1000, owner: subjects.Subject.Subject = None):
+    #
+    def __init__(self, value, owner: Subject = None, name: str = None):
+        super().__init__(value, name)
         self.name = name
-        self.money = money
+        self.money = 0
         self.owner = owner
         self.possessions = []
+        Company.company_list.append(self)
+
+    @classmethod
+    def list_companies(cls):
+        return cls.company_list

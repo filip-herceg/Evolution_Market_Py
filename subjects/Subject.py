@@ -1,29 +1,22 @@
 from typing import List
-
-import env.Debt as Debt
-import env.Possession
-import subjects.Bank as Bank
+from env.Debt import Debt
+from env.Possession import Possession
+from subjects.Bank import Bank
 
 
 class Subject:
-    # This attribute represents the name of the subject, which could be used to identify and distinguish it from
-    # other subjects.
-    name: str
+    # Create a class attribute to store the instances of the class
+    subject_list = []
 
-    # This attribute represents the amount of currency that a human has to spend on buying and selling items.
-    money: float
-
-    # This attribute represents the items that a human owns, such as cars, houses, or other valuable assets.
-    possessions: List[env.Possession]
-
-    def __init__(self, name: str = None, money: float = 100):
+    def __init__(self, money: float = 100, name: str = None):
         self.debts: List[Debt] = []
         self.name = name
         self.money = money
+        Subject.subject_list.append(self)
 
     def __check_bank(self):
         # Check if the subject is a Bank instance
-        return isinstance(self, Bank.Bank)
+        return isinstance(self, Bank)
 
     # Can transfer money to another subject
     def transfer_money(self, subject: 'Subject', amount: float):
@@ -44,3 +37,16 @@ class Subject:
                 subject.money += amount
             else:
                 print("Insufficient funds")
+
+    # Can transfer a possession to another subject
+    def transfer_possession(self, subject: 'Subject', possession: Possession):
+        # Check if the subject owns the possession
+        if possession.owner == self:
+            # Transfer possession
+            possession.owner = subject
+        else:
+            print("The subject does not own the possession")
+
+    @classmethod
+    def list_subjects(cls):
+        return cls.subject_list
