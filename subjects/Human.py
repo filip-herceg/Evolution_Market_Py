@@ -93,7 +93,7 @@ class Human(Subject):
         # Check if the human has enough money to create the company
         if self.money >= spending_money:
             # Create the company
-            company = Company(name, spending_money, self)
+            company = Company(spending_money, self, name)
             # Transfer money to the company
             self.transfer_money(company, spending_money)
         else:
